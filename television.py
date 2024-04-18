@@ -3,6 +3,7 @@ class Television:
     MAX_VOLUME = 2
     MIN_CHANNEL = 0
     MAX_CHANNEL = 3
+    volume_tracking = ['-']
 
     def __init__(self):
         self.__status = False
@@ -23,8 +24,12 @@ class Television:
         if self.__status == True:
             if self.__muted == True:
                 self.__muted = False
+                self.__volume = Television.volume_tracking[0]
+                Television.volume_tracking[0] = '-'
             else:
                 self.__muted = True
+                Television.volume_tracking[0] = self.__volume
+                self.__volume = Television.MIN_VOLUME
 
     def channel_up(self):
         if self.__status == True:
@@ -44,6 +49,8 @@ class Television:
         if self.__status == True:
             if self.__muted == True:
                 self.__muted = False
+                self.__volume = Television.volume_tracking[0]
+                Television.volume_tracking[0] = '-'
             if self.__volume != Television.MAX_VOLUME:
                 self.__volume += 1
 
@@ -51,6 +58,8 @@ class Television:
         if self.__status == True:
             if self.__muted == True:
                 self.__muted = False
+                self.__volume = Television.volume_tracking[0]
+                Television.volume_tracking[0] = '-'
             if self.__volume != Television.MIN_VOLUME:
                 self.__volume -= 1
 
